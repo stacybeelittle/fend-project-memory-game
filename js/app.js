@@ -39,15 +39,27 @@ function shuffleDeck() {
     }
 }
 shuffleDeck();
-
+/*Global variables*/
 let moves = 0;
 
 let toggledCards = [];
+
+let clockOff = true;
+
+let time = 0;
+
+let clockId;
+
+
 
 
     deck.addEventListener('click', event => {
         const clickTarget = event.target;
         if (isClickValid(clickTarget)) {
+            if (clockOff) {
+                startClock();
+                clockOff = false;
+            }
             toggleCard(clickTarget);
             addToggleCard(clickTarget);
             if (clickTarget.classList.contains('card') && toggledCards.length === 2){
@@ -95,7 +107,7 @@ let toggledCards = [];
     }
 
     function checkScore() {
-        if (moves === 15 || moves === 20 || moves === 30) {
+        if (moves === 17 || moves === 22 || moves === 30) {
             hideStar();
         }
     }
@@ -109,8 +121,32 @@ let toggledCards = [];
             }
         }
     }
+
     
- 
+    function startClock() {
+        clockId = setInterval(() => {
+            time++;
+            console.log(time);
+            displayTime();
+        }, 1000);
+    }
+    
+    
+    function displayTime() {
+        const clock = document.querySelector('.clock');
+        const minutes = Math.floor(time / 60);
+        const seconds = time % 60;
+        if (seconds < 10) {
+            clock.innerHTML = `${minutes}:0${seconds}`;
+        } else {
+            clock.innerHTML = `${minutes}:${seconds}`;
+        }
+    }
+    
+    
+    function stopClock() {
+        clearInterval(clockId);
+    }
  /*
  * 
  * 
