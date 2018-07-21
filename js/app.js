@@ -40,6 +40,8 @@ function shuffleDeck() {
 }
 shuffleDeck();
 
+let moves = 0;
+
 let toggledCards = [];
 
 
@@ -50,6 +52,8 @@ let toggledCards = [];
             addToggleCard(clickTarget);
             if (clickTarget.classList.contains('card') && toggledCards.length === 2){
                 checkForMatch(clickTarget);
+                addMove();
+                checkScore();
             }
         }
     });
@@ -84,8 +88,29 @@ let toggledCards = [];
         }
     }
 
+    function addMove() {
+        moves++;
+        const movesText = document.querySelector('.moves');
+        movesText.innerHTML = moves;
+    }
 
+    function checkScore() {
+        if (moves === 15 || moves === 20 || moves === 30) {
+            hideStar();
+        }
+    }
 
+    function hideStar() {
+        const allStars = document.querySelectorAll('.stars li');
+        for (star of allStars) {
+            if (star.style.display !== 'none') {
+                star.style.display = 'none';
+                break;
+            }
+        }
+    }
+    
+ 
  /*
  * 
  * 
