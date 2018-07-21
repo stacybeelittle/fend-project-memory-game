@@ -26,8 +26,7 @@ function shuffle(array) {
 }
 
 
-/*
- * set up the event listener for a card. If a card is clicked:*/
+
 
 const deck = document.querySelector('.deck');
 
@@ -41,17 +40,13 @@ function shuffleDeck() {
 shuffleDeck();
 /*Global variables*/
 let moves = 0;
-
 let toggledCards = [];
-
 let clockOff = true;
-
 let time = 0;
-
 let clockId;
 
 
-
+//event listener
 
     deck.addEventListener('click', event => {
         const clickTarget = event.target;
@@ -107,7 +102,7 @@ let clockId;
     }
 
     function checkScore() {
-        if (moves === 17 || moves === 22 || moves === 30) {
+        if (moves === 17 || moves === 21 || moves === 25) {
             hideStar();
         }
     }
@@ -147,19 +142,42 @@ let clockId;
     function stopClock() {
         clearInterval(clockId);
     }
- /*
- * 
- * 
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- * 
- */
 
+    function toggleModal() {
+        const modal = document.querySelector('.modal_background');
+        modal.classList.toggle('hide');
+    }
 
-/*
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
+    function writeModalStats() {
+        const timeStat = document.querySelector('.modal_time');
+        const clockTime = document.querySelector('.clock').innerHTML;
+        const movesStat = document.querySelector('.modal_moves');
+        const starsStat = document.querySelector('.modal_stars');
+        const stars = getStars();
+
+        timeStat.innerHTML = `Time - ${clockTime}`;
+        movesStat.innerHTML = `Moves - ${moves}`;
+        starsStat.innerHTML = `Stars - ${stars}`;
+    }
+
+    function getStars() {
+        stars = document.querySelectorAll('.stars li');
+        starCount = 0;
+        for (star of stars) {
+            if (star.style.display !== 'none') {
+                starCount++;
+            }
+        }
+        return starCount;
+    }
+
+    document.querySelector('.modal_cancel').addEventListener('click', () => {
+        toggleModal();
+    })
+
+    document.querySelector('.modal_replay').addEventListener('click', () => {
+        //RESET FUNCTION GOES HERE
+    })
+
+    
+
