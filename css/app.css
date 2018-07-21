@@ -17,8 +17,7 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
-    font-family: 'Coda', cursive;
+    background: #ffffff url('https://i.pinimg.com/originals/42/95/5f/42955f3b02ba57e358d388f5077a9066.jpg'); 
 }
 
 .container {
@@ -29,8 +28,10 @@ body {
 }
 
 h1 {
+    color: darkgray;
     font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
+    font-weight: 400;
+    font-size: 4rem;
 }
 
 /*
@@ -40,7 +41,7 @@ h1 {
 .deck {
     width: 660px;
     min-height: 680px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    background: linear-gradient(10deg, #2cc0c0 0%, #070707 100%);
     padding: 32px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
@@ -163,11 +164,13 @@ h1 {
 }
 
 .score-panel .stars li {
+    color: yellow;
     list-style: none;
     display: inline-block;
 }
 
 .score-panel .restart {
+    color: darkgrey;
     float: right;
     cursor: pointer;
 }
