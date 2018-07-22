@@ -109,6 +109,11 @@ let toggledCards = [];
         moves++;
         const movesText = document.querySelector('.moves');
         movesText.innerHTML = moves;
+        if (moves === 1) {
+            document.querySelector('.movesHtml').innerHTML = "  Move";
+        } else {
+            document.querySelector('.movesHtml').innerHTML = "  Moves";
+        }
     }
 
     function checkScore() {
@@ -126,7 +131,6 @@ let toggledCards = [];
             }
         }
     }
-
     
     function startClock() {
         clockId = setInterval(() => {
@@ -180,6 +184,7 @@ let toggledCards = [];
         return starCount;
     }
 
+    
     function replayGame() {
         resetGame();
         toggleModal();
