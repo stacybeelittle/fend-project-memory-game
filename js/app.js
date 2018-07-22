@@ -52,7 +52,7 @@ let time = 0;
 let toggledCards = [];
 
 
-//event listener
+//event listener to make clicks responsive
 
     deck.addEventListener('click', event => {
         const clickTarget = event.target;
@@ -71,21 +71,30 @@ let toggledCards = [];
         }
     });
 
+
+    //checks that clicks are on valid cards (not already matched cards)
+
     function isClickValid(clickTarget) {
         return (clickTarget.classList.contains('card') && 
         !clickTarget.classList.contains('match') && toggledCards.length < 2 && !toggledCards.includes(clickTarget)
         );
     }
 
+    //switches cards from open to closed
+
     function toggleCard(card) {
         card.classList.toggle('open');
         card.classList.toggle('show');
     }
 
+    //adds card to small array to check for a match
+
     function addToggleCard(clickTarget) {
         toggledCards.push(clickTarget);
         console.log(toggledCards);
     }
+
+    //checks the cards against each other to see if they are matching.  Also triggers the end of the game if all matched cards are found
 
     function checkForMatch() {
         if (toggledCards[0].firstElementChild.className === toggledCards[1].firstElementChild.className) {
@@ -105,6 +114,8 @@ let toggledCards = [];
         }
     }
 
+    //adds moves to the move counter, changes html of word 'Moves' if only a single move has been recorded
+
     function addMove() {
         moves++;
         const movesText = document.querySelector('.moves');
@@ -115,6 +126,8 @@ let toggledCards = [];
             document.querySelector('.movesHtml').innerHTML = "  Moves";
         }
     }
+
+    //adjusts number of stars depending on how many clicks are made
 
     function checkScore() {
         if (moves === 17 || moves === 21 || moves === 25) {
@@ -132,6 +145,8 @@ let toggledCards = [];
         }
     }
     
+    //triggers the timer to begin
+
     function startClock() {
         clockId = setInterval(() => {
             time++;
@@ -139,7 +154,8 @@ let toggledCards = [];
         }, 1000);
     }
     
-    
+    //adjusts clock on page to reflect time on timer
+
     function displayTime() {
         const clock = document.querySelector('.clock');
         const minutes = Math.floor(time / 60);
@@ -151,15 +167,22 @@ let toggledCards = [];
         }
     }
     
-    
+    //stops the clock
+
     function stopClock() {
         clearInterval(clockId);
     }
+
+    //Modal functions
+
+    //triggers modal to appear and disappear
 
     function toggleModal() {
         const modal = document.querySelector('.modal_background');
         modal.classList.toggle('hide');
     }
+
+    //prints game stats to the modal at end of game
 
     function writeModalStats() {
         const timeStat = document.querySelector('.modal_time');
@@ -184,7 +207,10 @@ let toggledCards = [];
         return starCount;
     }
 
-    
+    //Replay/reset functions
+
+    //triggers game to reset all previous settings and start new game
+
     function replayGame() {
         resetGame();
         toggleModal();
@@ -236,6 +262,7 @@ let toggledCards = [];
 
     document.querySelector('.restart').addEventListener('click', resetGame);
 
+//ends the game 
 
     function gameOver() {
         stopClock();
