@@ -91,7 +91,6 @@ let toggledCards = [];
 
     function addToggleCard(clickTarget) {
         toggledCards.push(clickTarget);
-        console.log(toggledCards);
     }
 
     //checks the cards against each other to see if they are matching.  Also triggers the end of the game if all matched cards are found
@@ -230,6 +229,7 @@ let toggledCards = [];
         resetMoves();
         resetStars();
         shuffleDeck();
+        toggledCards = [];
     }
 
     function resetGameAndTime() {
